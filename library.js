@@ -28,11 +28,12 @@ function addBookToLibrary(test) {
 
 
 // Function to create new book object
-function Book(title, author, pages, read) {
+function Book(title, author, pages, read, edit) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
+  this.edit = edit;
 }
 
 
@@ -44,6 +45,9 @@ function newBook() {
   if (name != '' && author != '' && pages != '') {
     const newAdd = new Book(name, author, pages, status); // create new object from user input
     addBookToLibrary(newAdd) // call function to add new object to library
+    document.querySelector("#name").value = '';
+    document.querySelector("#author").value = '';
+    document.querySelector("#pages").value = '';
     return;
   }
   return alert('Please dont fuck around');
@@ -62,20 +66,22 @@ if (library === null) {
   const retrievedObject = localStorage.getItem('myLibrary');
   const library = JSON.parse(retrievedObject);
   const createList = () => {
-  
+
     let elem = "<ul>";
-  
+
     library.forEach(book => {
       for (let key in book) {
-        elem += `<li>${book[key]}</li>`; 
+        elem += `<li>${book[key]}</li>`;
       }
-      elem +="</ul><ul>"
+      
+      // elem +="</ul><ul>"
+      elem =+"</ul><ul>";
     })
     const page = document.querySelector(".bookList");
     page.innerHTML = elem;
-  
+
   }
-  
+
   createList();
 }
 
@@ -83,19 +89,18 @@ if (library === null) {
 
 //Iterate through retrieved library array from local storage and create HTML unordered list
 const createList = () => {
-  
-    let elem = "<ul>";
-  
-    library.forEach(book => {
-      for (let key in book) {
-        elem += `<li>${book[key]}</li>`; 
-      }
-      elem +="</ul><ul>"
-    })
-    const page = document.querySelector(".bookList");
-    page.innerHTML = elem;
-  
-  }
-  
-  createList();
-  
+
+  let elem = "<ul>";
+
+  library.forEach(book => {
+    for (let key in book) {
+      elem += `<li>${book[key]}</li>`;
+    }
+    elem += "<button>Edit</button></ul><ul>"
+  })
+  const page = document.querySelector(".bookList");
+  page.innerHTML = elem;
+
+}
+
+createList();
