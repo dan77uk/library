@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Library App for The Odin Project</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="library.js" defer></script>
+</head>
+
+<body>
+
+  <div class="bodyWrapper">
+
+    <div class="header">
+      <h1>My Book Library</h1>
+      <h2>Developed for <a href="https://www.theodinproject.com/" target="blank" rel="noreferrer noopener">The Odin
+          Project</a></h2>
+    </div>
+
+    <div class="contentWrapper">
+      <h3>Library App</h3>
+
+      <div class="newBookForm">
+
+        <div>
+          <label for="name">Book</label>
+          <input type="text" id="name" />
+        </div>
+
+        <div>
+          <label for="author">Author</label>
+          <input type="text" id="author" />
+        </div>
+
+        <div>
+          <label for="pages">Pages</label>
+          <input type="text" id="pages" />
+        </div>
+
+        <div>
+          <label for="status">Status</label>
+          <select name="status" id="status">
+            <option value=true>Read</option>
+            <option value=false>Not read</option>
+          </select>
+        </div>
+
+        <input type="button" onclick="newBook()" value="SUBMIT" class="submit" />
+
+      </div>
+
+      <div class="bookListTitles">
+        <ul>
+          <li>Book Title</li>
+          <li>Author</li>
+          <li>Pages</li>
+          <li>Status</li>
+        </ul>
+        </div>
+        <div class="bookList">
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <a href='https://github.com/dtp77' target="blank" rel="noreferrer noopener"><img src='github.svg'
+          alt='gitHub logo'></a>
+      <p>&copy; Dan Phillips <span class="date"></span></p>
+    </div>
+
+  </div>
+
+</body>
+
+
+</html>
