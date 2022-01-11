@@ -3,6 +3,7 @@ let date = new Date().getFullYear();
 document.querySelector(".date").textContent = date;
 
 
+// Default Library Data
 let myLibrary = [
   {
     name: "To Kill a Mockingbird",
@@ -18,6 +19,12 @@ let myLibrary = [
   }
 ];
 
+// // Retrieve the myLibrary array from localStorage and set to default data if no items in localStorage
+const library = JSON.parse(localStorage.getItem('myLibrary'));
+if (library.length === 0) {
+  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+}
+
 function addBookToLibrary(test) {
   const retrievedLibrary = JSON.parse(localStorage.getItem('myLibrary')); // Parse any exisiting JSON stored in myLibrary
   localStorage.setItem("book", JSON.stringify(test));
@@ -26,16 +33,13 @@ function addBookToLibrary(test) {
   window.location.reload();
 }
 
-
 // Function to create new book object
-function Book(title, author, pages, read, edit) {
+function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.read = read;
-  this.edit = edit;
 }
-
 
 function newBook() {
   const name = document.querySelector("#name").value;
@@ -53,54 +57,68 @@ function newBook() {
   return alert('Please dont fuck around');
 }
 
-// Put the object into storage
-//localStorage.setItem('myLibrary', JSON.stringify(myLibrary)); 
-
-// // Retrieve the myLibrary array from localStorage
-const retrievedObject = JSON.parse(localStorage.getItem('myLibrary'));
-console.log(retrievedObject);
-const library = retrievedObject;
-
-if (library === null) {
-  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
-  const retrievedObject = localStorage.getItem('myLibrary');
-  const library = JSON.parse(retrievedObject);
-  const createList = () => {
-
-    let elem = "<ul>";
-
-    library.forEach(book => {
-      for (let key in book) {
-        elem += `<li>${book[key]}</li>`;
-      }
-      
-      // elem +="</ul><ul>"
-      elem =+"</ul><ul>";
-    })
-    const page = document.querySelector(".bookList");
-    page.innerHTML = elem;
-
-  }
-
-  createList();
-}
-
-
-
 //Iterate through retrieved library array from local storage and create HTML unordered list
 const createList = () => {
-
   let elem = "<ul>";
+  library.forEach( (book, index) => {
 
-  library.forEach(book => {
     for (let key in book) {
-      elem += `<li>${book[key]}</li>`;
+      if (key != "read") {
+        elem += `<li>${book[key]}</li>`; 
+      }
     }
-    elem += "<button>Edit</button></ul><ul>"
+
+    let bookState = "";
+    if (library[index].read == "Unread") {
+      bookState = "unread"; 
+    } else { 
+      bookState = "read";
+    }
+    console.log(bookState);
+    
+    elem += "<button class='updateRead " + bookState + "' value='" + index + "'>" + library[index].read + "</button>";
+    elem += "<button class='delete' value='" + index + "'>Delete</button></ul><ul>";
   })
   const page = document.querySelector(".bookList");
   page.innerHTML = elem;
-
 }
 
 createList();
+
+// Delete book object from array
+  document.querySelectorAll(".delete").forEach(function(item) {
+
+    item.addEventListener("click", function() {
+
+      const index = item.value;
+      console.log(library[index]);
+      library.splice(index, 1);
+      localStorage.setItem("myLibrary", JSON.stringify(library));
+      window.location.reload();
+    });
+  });
+
+
+
+
+// Update read status of book object in array
+  document.querySelectorAll(".updateRead").forEach(function(item) {
+
+    item.addEventListener("click", function() {
+
+      const index = item.value;
+
+      if (library[index].read === "Read") {
+        library[index].read = "Unread";
+        localStorage.setItem("myLibrary", JSON.stringify(library));
+        window.location.reload();
+
+      } else if (library[index].read === "Unread") {
+        library[index].read = "Read";
+        localStorage.setItem("myLibrary", JSON.stringify(library));
+        window.location.reload();
+  
+      }
+    });
+  });
+

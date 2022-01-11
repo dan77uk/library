@@ -39,36 +39,38 @@ html, body {
 .newBookForm {
   width: 100%;
   margin: 30px 0;
-  display: flex;
-  flex-wrap: wrap;
   background-color: #f7f7f7;
-  padding: 20px 40px;
-
-}
-
-.newBookForm div {
-  flex-basis: 25%;
+  padding: 20px 40px 35px 40px;
+  display: grid;
+  grid-template-columns: 40% 25% 6% 10% 13%;
+  grid-gap: 1%;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .newBookForm label {
   display: block;
+  font-size: .8em;
+  font-weight: bolder;
+  margin-bottom: 5px;
 }
 
 .newBookForm input, .newBookForm select {
   padding: 10px 5px;
+  width: 100%;
 }
 
 .submit {
-  padding: 10px 45px!important;
-  margin: 10px 0;
+  margin-top: 17px;
+  padding: 12px 0 !important;
   color: #FFF;
   border: none;
   background-color: #305a85;
-  font-weight: bold;
-  letter-spacing: .1em;
   cursor: pointer;
 }
 
+
+/* Booklist Display */
 .bookList, .bookListTitles {
   display: grid;
   width: 100%;
@@ -76,7 +78,9 @@ html, body {
 
 .bookList ul, .bookListTitles ul {
   display: grid;
-  grid-template-columns: 30% 20% 10% 10% 15%;
+  grid-template-columns: 40% 22% 10% 16% 8%;
+  grid-column-gap: 1%;
+  align-items: center;
 }
 
 .bookListTitles ul {
@@ -86,10 +90,39 @@ html, body {
 }
 
 .bookList ul {
-  border-top: solid 1px #d1d1d1;
+  border-top: solid 1px #ebebeb;
   padding: 10px 0;
 }
 
+.delete, .updateRead {
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.updateRead {
+  background: #fae8e0;
+}
+
+.updateRead:hover {
+  background: #eedbd3;
+}
+
+.unread {
+  background: #b6e2d3;
+}
+
+.unread:hover {
+  background: #a5d1c2;
+}
+
+.delete {
+  background: #ef7c8e;
+}
+
+.delete:hover {
+  background: #e27484;
+}
 
 
 
@@ -136,18 +169,13 @@ html, body {
 /* Footer Styling */
 .footer {
   display: flex;
-  height: 80px;
-  background: #0f2133;
-  padding: 15px 15px 15px 0;
-}
-
-.footer img {
-  margin: 5px 0 0 40px;
-  height: 40px;
+  padding: 20px 0;
+  background: #fcfcfc;
+  justify-content: center;
 }
 
 .footer p {
   font-size: .9em;
-  color: #FFF;
-  margin: 15px 0 0 20px;
+  color: #464646;
+
 }
