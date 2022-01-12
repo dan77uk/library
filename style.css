@@ -21,7 +21,7 @@ html, body {
 .bodyWrapper {
   min-height: 100%;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows:1fr auto;
   grid-template-columns: 100%;
 }
 
@@ -30,12 +30,21 @@ html, body {
   margin: 50px auto;
 }
 
-.contentWrapper h3 {
-  font-size: 2em;
-  font-weight: lighter;
+.contentWrapper h1 {
+  font-size: 3em;
   margin-bottom: 10px;
+  font-weight: lighter;
 }
 
+.contentWrapper h1 span {
+  font-weight: 500;
+}
+
+.contentWrapper p {
+  margin: 30px 0;
+}
+
+/* Add new book form */
 .newBookForm {
   width: 100%;
   margin: 30px 0;
@@ -68,7 +77,6 @@ html, body {
   background-color: #305a85;
   cursor: pointer;
 }
-
 
 /* Booklist Display */
 .bookList, .bookListTitles {
@@ -125,57 +133,38 @@ html, body {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Header */
-.header {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  padding: 10px 40px;
-  background: #fcfcfc;
-  border-bottom: solid 1px #e7e7e7;
-  justify-content: space-between;
-  color: #4e4e4e;
-}
-
-.header h1 {
-  font-size: 1.3em;
-  font-weight: bold;
-}
-
-.header h2 {
-  font-size: 1em;
-  font-weight: 200;
-}
-
 /* Footer Styling */
 .footer {
   display: flex;
-  padding: 20px 0;
-  background: #fcfcfc;
+  padding: 20px 40px;
+  background: #2a3030;
   justify-content: center;
+  align-items: center;
+  text-align: right;
 }
 
 .footer p {
+  width: 100%;
   font-size: .9em;
-  color: #464646;
-
+  color: #ececec;
 }
+
+.footer p a {
+  font-weight: bold;
+  color: #FFF; 
+}
+
+.gitHub {
+  background: rgb(30, 32, 32);
+  border: solid 2px rgb(30, 32, 32);
+  padding: 5px 15px;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+
+.gitHub:hover {
+  background: rgb(22, 22, 22);
+  border:solid 2px #000;
+  transition: .5s;
+}
+
