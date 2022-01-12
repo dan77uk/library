@@ -2,8 +2,7 @@
 let date = new Date().getFullYear();
 document.querySelector(".date").textContent = date;
 
-
-// Default Library Data
+// Create default/placeholder library data in case there is none in localStorage 
 let myLibrary = [
   {
     name: "To Kill a Mockingbird",
@@ -19,11 +18,22 @@ let myLibrary = [
   }
 ];
 
-// // Retrieve the myLibrary array from localStorage and set to default data if no items in localStorage
-const library = JSON.parse(localStorage.getItem('myLibrary'));
-if (library.length === 0) {
-  localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+//  Pull any data stored in localStorage to populate the library OR 
+//  populate the library with our own placeholder data
+const populateLibrary = () => {
+  let res = JSON.parse(localStorage.getItem('myLibrary'));
+
+  if (res === null || res.length === 0)  {    
+    res = localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+    window.location.reload();
+  }
+
+  return res;
 }
+
+let library = populateLibrary();
+
+
 
 function addBookToLibrary(test) {
   const retrievedLibrary = JSON.parse(localStorage.getItem('myLibrary')); // Parse any exisiting JSON stored in myLibrary
@@ -57,7 +67,8 @@ function newBook() {
   return alert('Please dont fuck around');
 }
 
-//Iterate through retrieved library array from local storage and create HTML unordered list
+//  Iterate through retrieved library array from 
+//  local storage and create HTML unordered list
 const createList = () => {
   let elem = "<ul>";
   library.forEach( (book, index) => {
@@ -74,7 +85,6 @@ const createList = () => {
     } else { 
       bookState = "read";
     }
-    console.log(bookState);
     
     elem += "<button class='updateRead " + bookState + "' value='" + index + "'>" + library[index].read + "</button>";
     elem += "<button class='delete' value='" + index + "'>Delete</button></ul><ul>";
@@ -97,9 +107,6 @@ createList();
       window.location.reload();
     });
   });
-
-
-
 
 // Update read status of book object in array
   document.querySelectorAll(".updateRead").forEach(function(item) {
