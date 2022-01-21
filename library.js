@@ -15,7 +15,45 @@ let myLibrary = [
   }
 ];
 
-// Iterate through myLibrary array to display book objects
+class bookClass {
+
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+
+}    
+
+  
+  function newBook() {
+      const name = document.querySelector("#name").value;
+      const author = document.querySelector("#author").value;
+      const pages = document.querySelector("#pages").value;
+      const status = document.querySelector("#status").value;
+    
+      if (name != '' && author != '' && pages != '') {
+    
+        const newAddition = new bookClass(name, author, pages, status); // create new object from user input
+  
+        myLibrary.push(newAddition);
+      
+        createList();
+    
+        document.querySelector("#name").value = '';
+        document.querySelector("#author").value = '';
+        document.querySelector("#pages").value = '';
+    
+        return;
+      }
+    
+      return alert('Form cannot be blank');
+    }
+
+
+
+// // Iterate through myLibrary array to display book objects
 let createList = () => {
   let elem = "<ul>";
   myLibrary.forEach( (item, index) => {
@@ -72,35 +110,5 @@ let createList = () => {
  
 createList();
 
-// Function to create new book object 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
 
-  function newBook() {
-    const name = document.querySelector("#name").value;
-    const author = document.querySelector("#author").value;
-    const pages = document.querySelector("#pages").value;
-    const status = document.querySelector("#status").value;
-  
-    if (name != '' && author != '' && pages != '') {
-  
-      const newAddition = new Book(name, author, pages, status); // create new object from user input
-
-      myLibrary.push(newAddition);
-    
-      createList();
-  
-      document.querySelector("#name").value = '';
-      document.querySelector("#author").value = '';
-      document.querySelector("#pages").value = '';
-  
-      return;
-    }
-  
-    return alert('Form cannot be blank');
-  }
   
