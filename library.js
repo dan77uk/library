@@ -1,6 +1,3 @@
-///// Copyright footer /////
-let date = new Date().getFullYear();
-document.querySelector(".date").textContent = date;
 
 // Create default/placeholder library data in case there is none in localStorage 
 let myLibrary = [
