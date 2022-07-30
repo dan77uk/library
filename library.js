@@ -1,4 +1,3 @@
-
 // Create default/placeholder library data in case there is none in localStorage 
 let myLibrary = [
   {
@@ -13,8 +12,7 @@ let myLibrary = [
     pages: "593",
     read: "Unread"
   }
-];
-
+]
 class bookClass {
 
     constructor(title, author, pages, read) {
@@ -26,7 +24,6 @@ class bookClass {
 
 }    
 
-  
   function newBook() {
       const name = document.querySelector("#name").value;
       const author = document.querySelector("#author").value;
@@ -51,9 +48,7 @@ class bookClass {
       return alert('Form cannot be blank');
     }
 
-
-
-// // Iterate through myLibrary array to display book objects
+// Iterate through myLibrary array to display book objects
 let createList = () => {
   let elem = "<ul>";
   myLibrary.forEach( (item, index) => {
@@ -89,6 +84,7 @@ let createList = () => {
   
     });
   });
+
   // Update read status of book object in array
   document.querySelectorAll(".updateRead").forEach(function(item) {
 
