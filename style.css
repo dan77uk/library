@@ -34,6 +34,7 @@ html, body {
   width: 480px;
   padding: 60px;
   border-radius: 5px;
+  box-shadow: 5px 5px 45px #3f3d3d;
 }
 
 #modalHeader {
@@ -46,13 +47,19 @@ html, body {
 
 #modalHeader button {
   margin-left: auto;
-  padding: 5px 15px;
+  padding: 3px 9px;
   color: #FFF;
   border: none;
   cursor: pointer;
   border-radius: 3px;
-  font-weight: 500;
+  font-weight: 800;
   background-color: rgb(199, 86, 78);
+  font-size: .7rem;
+}
+
+#modalHeader button:hover {
+  background-color: rgb(78, 175, 199);
+  transition: 300ms;
 }
 
 /* Add new book form */
@@ -103,16 +110,15 @@ html, body {
   border-radius: 3px;
   font-weight: 700;
   background-color: #305a85;
+}
 
+#addBook:hover {
+  background-color: #23415f;
 }
 
 /* */
 
 .bodyWrapper {
-  min-height: 100%;
-  display: grid;
-  grid-template-rows:1fr auto;
-  grid-template-columns: 100%;
 }
 
 .contentWrapper {
@@ -137,27 +143,24 @@ html, body {
 
 
 /* Booklist Display */
-.bookList, .bookListTitles {
-  display: grid;
-  width: 100%;
-}
 
-.bookList ul, .bookListTitles ul {
-  display: grid;
-  grid-template-columns: 40% 22% 10% 16% 8%;
-  grid-column-gap: 1%;
-  align-items: center;
-}
 
-.bookListTitles ul {
-  font-weight: bold;
-  font-size: 14px;
-  margin: 0 0 20px 0;
-}
-
-.bookList ul {
+#bookList {
   border-top: solid 1px #ebebeb;
   padding: 10px 0;
+  display: grid;
+  grid-template-columns: 33.3fr 33.3fr 33.3fr;
+  gap: 20px;
+}
+
+.bookCard {
+  border: solid 1px rgb(233, 233, 233);
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.bookCard:hover {
+  border: solid 1px rgb(189, 189, 189);
 }
 
 .delete, .updateRead {

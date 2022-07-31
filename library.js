@@ -1,10 +1,28 @@
-// Create default/placeholder library data in case there is none in localStorage 
+// Create default/placeholder library data 
 let myLibrary = [
   {
     title: "To Kill a Mockingbird",
     author: "Harper Lee",
     pages: "245",
     read: "Read"
+  },
+  {
+    title: "Javascript & Jquery",
+    author: "Jon Duckett",
+    pages: "593",
+    read: "Unread"
+  },
+  {
+    title: "Javascript & Jquery",
+    author: "Jon Duckett",
+    pages: "593",
+    read: "Unread"
+  },
+  {
+    title: "Javascript & Jquery",
+    author: "Jon Duckett",
+    pages: "593",
+    read: "Unread"
   },
   {
     title: "Javascript & Jquery",
@@ -34,6 +52,8 @@ class bookClass {
   
         myLibrary.push(newAddition);
         modal.style.display = 'none'
+        const bookListWrapper = document.getElementById('bookList')
+        bookListWrapper.innerHTML = ''
         createList();
     
         document.querySelector("#name").value = '';
@@ -47,59 +67,77 @@ class bookClass {
     }
 
 // Iterate through myLibrary array to display book objects
-let createList = () => {
-  let elem = "<ul>";
-  myLibrary.forEach( (item, index) => {
+// const createList = () => {
+//   let elem = "<ul>";
+//   myLibrary.forEach( (item, index) => {
 
-    for (let key in item) {
-      if (key != "read") {
-        elem += `<li>${item[key]}</li>`; 
-      }
-    }
+//     for (let key in item) {
+//       if (key != "read") {
+//         elem += `<li>${item[key]}</li>`; 
+//       }
+//     }
 
-    let bookState = "";
-    if (myLibrary[index].read == "Unread") {
-      bookState = "unread"; 
-    } else { 
-      bookState = "read";
-    }
+//     let bookState = "";
+//     if (myLibrary[index].read == "Unread") {
+//       bookState = "unread"; 
+//     } else { 
+//       bookState = "read";
+//     }
     
-    elem += "<button class='updateRead " + bookState + "' value='" + index + "'>" + myLibrary[index].read + "</button>";
-    elem += "<button class='delete' value='" + index + "'>Delete</button></ul><ul>";
-  })
-  const page = document.querySelector(".bookList");
-  page.innerHTML = elem;
+//     elem += "<button class='updateRead " + bookState + "' value='" + index + "'>" + myLibrary[index].read + "</button>";
+//     elem += "<button class='delete' value='" + index + "'>Delete</button></ul><ul>";
+//   })
+//   const page = document.querySelector(".bookList");
+//   page.innerHTML = elem;
 
-  // Delete book object from array
-  document.querySelectorAll(".delete").forEach(function(item) {
+//   // Delete book object from array
+//   document.querySelectorAll(".delete").forEach(function(item) {
 
-    item.addEventListener("click", () => {
+//     item.addEventListener("click", () => {
 
-      const index = item.value;
+//       const index = item.value;
     
-      myLibrary.splice(index, 1);
-      createList();
+//       myLibrary.splice(index, 1);
+//       createList();
   
-    });
-  });
+//     });
+//   });
 
-  // Update read status of book object in array
-  document.querySelectorAll(".updateRead").forEach(function(item) {
+//   // Update read status of book object in array
+//   document.querySelectorAll(".updateRead").forEach(function(item) {
 
-    item.addEventListener("click", function() {
+//     item.addEventListener("click", function() {
 
-      const index = item.value;
+//       const index = item.value;
 
-      if (myLibrary[index].read === "Read") {
-        myLibrary[index].read = "Unread";
-        createList();
+//       if (myLibrary[index].read === "Read") {
+//         myLibrary[index].read = "Unread";
+//         createList();
 
-      } else if (myLibrary[index].read === "Unread") {
-        myLibrary[index].read = "Read";
-        createList();
-      }
-    });
-  });
+//       } else if (myLibrary[index].read === "Unread") {
+//         myLibrary[index].read = "Read";
+//         createList();
+//       }
+//     });
+//   });
+// }
+
+function createList() {
+  const bookListWrapper = document.getElementById('bookList')
+  
+  myLibrary.forEach(book => {
+    const container = document.createElement('div')
+    container.className = 'bookCard'
+    const title = document.createElement('h1')
+    title.innerText = book.title
+    const author = document.createElement('h3')
+    author.innerText = `Written by ${book.author}`
+    const pages = document.createElement('p')
+    pages.innerText = `${book.pages} pages`
+    container.append(title, author, pages)
+    bookListWrapper.append(container)
+  })
+  
 }
  
 createList();
