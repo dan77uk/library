@@ -14,14 +14,12 @@ let myLibrary = [
   }
 ]
 class bookClass {
-
     constructor(title, author, pages, read) {
         this.title = title;
         this.author = author;
         this.pages = pages;
         this.read = read;
     }
-
 }    
 
   function newBook() {
@@ -35,7 +33,7 @@ class bookClass {
         const newAddition = new bookClass(name, author, pages, status); // create new object from user input
   
         myLibrary.push(newAddition);
-      
+        modal.style.display = 'none'
         createList();
     
         document.querySelector("#name").value = '';
@@ -107,4 +105,11 @@ let createList = () => {
 createList();
 
 
-  
+// Modal 
+const modal = document.getElementById('modal')
+const openModal = document.getElementById('openModal')
+const closeModal = document.getElementById('closeModal')
+
+// Open and close modal 
+openModal.onclick = function() { modal.style.display = 'block' }
+closeModal.onclick = function() { modal.style.display = 'none' }
