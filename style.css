@@ -16,14 +16,15 @@
 html, body {
   width: 100%;
   height: 100%;
-  background: #fff; 
+  background: rgb(30, 32, 41); 
+  color: rgb(233, 233, 233);
 }
 
 #modal {
   width: 100%;
   height: 100%;
   position: fixed;
-  background-color: rgba(36, 38, 61, 0.5);
+  background-color: rgba(36, 38, 61, 0.9);
   margin: 0 auto;
   display: none;
 }
@@ -97,38 +98,43 @@ html, body {
   width: 40%;
 }
 
-.read {
+.readSelect {
   margin-left: 15%;
 }
 
 #addBook {
   margin-top: 20px;
-  padding: 15px 45px;
-  color: #FFF;
-  border: none;
-  cursor: pointer;
-  border-radius: 3px;
   font-weight: 700;
-  background-color: #305a85;
+  background: rgb(8, 150, 206);
+  color: rgb(255, 255, 255);
 }
 
 #addBook:hover {
-  background-color: #23415f;
+  background-color: rgb(13, 127, 172);
 }
 
 /* */
 
+html button {
+  cursor: pointer;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 3px;
+}
+
 .bodyWrapper {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
 }
 
 .contentWrapper {
   max-width: 1280px;
-  margin: 20px auto;
-  padding: 0 20px;
+  margin: 0 auto;
+  padding: 40px 20px;
 }
 
 .contentWrapper h1 {
-  font-size: 2em;
+  font-size: 3em;
   margin-bottom: 10px;
   font-weight:700;
 }
@@ -141,13 +147,17 @@ html, body {
   margin: 30px 0;
 }
 
+#openModal {
+  background: rgb(238, 176, 5);
+}
+
 
 
 /* Booklist Display */
 
 
 #bookList {
-  border-top: solid 1px #ebebeb;
+  border-top: solid 5px rgb(28, 29, 36);
   padding: 20px 0;
   display: grid;
   grid-template-columns: 33.3fr 33.3fr 33.3fr;
@@ -155,19 +165,50 @@ html, body {
 }
 
 .bookCard {
-  border: solid 1px rgb(233, 233, 233);
+  display: grid;
+  background: rgb(49, 50, 65);
+  border: solid 3px rgb(28, 29, 36);
   border-radius: 5px;
   padding: 20px;
+  grid-template-rows: 1fr 0.5fr 0.5fr 0.5fr;
+  align-items: center;
 }
 
 .bookCard:hover {
-  border: solid 1px rgb(189, 189, 189);
+  border: solid 3px rgb(251, 255, 1);
+  transition: 1000ms;
 }
 
-.bookCard button {
-  border: none;
-  padding: 5px 15px;
-  cursor: pointer;
+.bookCard h2 {
+  font-size: 2rem;
+}
+
+.bookCard h3 {
+  font-size: .9rem;
+  font-weight: 400;
+  border-top: solid 1px rgb(28, 29, 36);
+  border-bottom: solid 1px rgb(28, 29, 36);
+  padding: 10px 0;
+  margin-top: 5px;
+}
+
+.bookCard div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.read {
+  background:rgba(250, 246, 11, 1);
+  color: rgb(34, 28, 28)
+}
+
+.unread {
+  background:rgb(223, 102, 32);
+}
+
+.deleteBook {
+  background: rgb(8, 150, 206);
+  color: rgb(255, 255, 255);
 }
 
 
@@ -206,3 +247,14 @@ html, body {
   transition: .5s;
 }
 
+@media only screen and (max-width: 959px) {
+  #bookList {
+    grid-template-columns: 50fr 50fr;
+  }
+}
+
+@media only screen and (max-width: 730px) {
+  #bookList {
+    grid-template-columns: 100fr;
+  }
+}

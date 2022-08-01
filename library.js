@@ -46,30 +46,30 @@ createList()
 class bookClass {
   constructor(title, author, pages, read) {
     this.id = generateId()
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
+    this.title = title
+    this.author = author
+    this.pages = pages
+    this.read = read
   }
 }    
 
 function newBook() {
-  const name = document.querySelector("#name").value;
-  const author = document.querySelector("#author").value;
-  const pages = document.querySelector("#pages").value;
-  const status = document.querySelector("#status").value;
+  const name = document.querySelector("#name").value
+  const author = document.querySelector("#author").value
+  const pages = document.querySelector("#pages").value
+  const status = document.querySelector("#status").value
     
-  if (name != '' && author != '' && pages != '') {
+  if (name !== '' && author !== '' && pages !== '') {
     const newAddition = new bookClass(name, author, pages, status); // create new object from user input
-    myLibrary.push(newAddition);
+    myLibrary.push(newAddition)
     modal.style.display = 'none'
-    createList();
-    document.querySelector("#name").value = '';
-    document.querySelector("#author").value = '';
-    document.querySelector("#pages").value = '';
-    return;
+    createList()
+    document.querySelector("#name").value = ''
+    document.querySelector("#author").value = ''
+    document.querySelector("#pages").value = ''
+    return
   }
-  return alert('Form cannot be blank');
+  return alert('Form cannot be blank')
 }
 
 function generateId() {
@@ -85,7 +85,7 @@ function createList() {
     const container = document.createElement('div')
     container.className = 'bookCard'
 
-    const title = document.createElement('h1')
+    const title = document.createElement('h2')
     title.innerText = book.title
 
     const author = document.createElement('h3')
@@ -96,10 +96,16 @@ function createList() {
     
     const readButton = document.createElement('button')
     const status = readStatus(`${book.read}`)
+    let buttonText
+    if (status === 'Read') {
+      buttonText = 'Mark as unread'
+    } else {
+      buttonText = 'Mark as read'
+    }
     readButton.type = 'submit'
-    readButton.className = 'readStatus'
+    readButton.className = status.toLowerCase()
     readButton.id = book.id
-    readButton.innerText = status
+    readButton.innerText = buttonText
     readButton.addEventListener('click', updateReadStatus)
 
 
@@ -110,7 +116,10 @@ function createList() {
     deleteButton.innerText = 'Delete'
     deleteButton.addEventListener('click', deleteBook)
 
-    container.append(title, author, pages, readButton, deleteButton)
+    const buttonContainer = document.createElement('div')
+    buttonContainer.append(readButton, deleteButton)
+
+    container.append(title, author, pages, buttonContainer)
     bookListWrapper.append(container)
 
   })
