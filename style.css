@@ -123,7 +123,8 @@ html, body {
 
 .contentWrapper {
   max-width: 1280px;
-  margin: 50px auto;
+  margin: 20px auto;
+  padding: 0 20px;
 }
 
 .contentWrapper h1 {
@@ -147,7 +148,7 @@ html, body {
 
 #bookList {
   border-top: solid 1px #ebebeb;
-  padding: 10px 0;
+  padding: 20px 0;
   display: grid;
   grid-template-columns: 33.3fr 33.3fr 33.3fr;
   gap: 20px;
@@ -163,34 +164,10 @@ html, body {
   border: solid 1px rgb(189, 189, 189);
 }
 
-.delete, .updateRead {
+.bookCard button {
   border: none;
-  padding: 10px 20px;
+  padding: 5px 15px;
   cursor: pointer;
-}
-
-.updateRead {
-  background: #fae8e0;
-}
-
-.updateRead:hover {
-  background: #eedbd3;
-}
-
-.unread {
-  background: #b6e2d3;
-}
-
-.unread:hover {
-  background: #a5d1c2;
-}
-
-.delete {
-  background: #ef7c8e;
-}
-
-.delete:hover {
-  background: #e27484;
 }
 
 
