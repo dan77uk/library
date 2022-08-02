@@ -33,17 +33,18 @@ html, body {
 #modalInner {
   background-color: rgb(255, 255, 255);
   margin: 10% auto;
-  width: 480px;
+  width: 600px;
   padding: 60px;
   border-radius: 5px;
-  box-shadow: 5px 5px 45px #3f3d3d;
+  box-shadow: 5px 5px 45px #272c3b;
+  background: rgb(49, 50, 65);
+  color: rgb(209, 209, 209); 
 }
 
 #modalHeader {
   width: 100%;
   border-bottom: solid 1px rgb(209, 209, 209);
   padding-bottom: 15px;
-  color: rgb(53, 53, 53);
   display: flex;
 }
 
@@ -77,12 +78,16 @@ html, body {
   font-size: .8rem;
   font-weight: 700;
   margin-bottom: 5px;
+  color: rgb(209, 209, 209);
 }
 
 #newBookForm input, #newBookForm select {
   padding: 10px 5px;
-  border: solid 1px #d8d8d8;
+  border: solid 1px rgb(16, 16, 19);
   border-radius: 3px;
+  background: rgb(30, 32, 41);
+  color: rgb(209, 209, 209); 
+  font-size: 1rem;
 }
 
 .oneCol {
@@ -108,6 +113,7 @@ html, body {
   font-weight: 700;
   background: rgb(8, 150, 206);
   color: rgb(255, 255, 255);
+  padding: 15px 45px;
 }
 
 #addBook:hover {
@@ -155,8 +161,6 @@ html button {
 
 
 /* Booklist Display */
-
-
 #bookList {
   border-top: solid 5px rgb(28, 29, 36);
   padding: 20px 0;
