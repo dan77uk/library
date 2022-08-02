@@ -1,15 +1,13 @@
 // Create default/placeholder library data 
-let myLibrary = [
+let books = [
   {
-    id: generateId(),
     title: "React Quickly, 2nd Ed.",
     author: "Morten Barklund & Azat Marden",
     pages: "575",
-    read: "Read",
+    read: "Unread",
     buy: "https://www.manning.com/books/react-quickly-second-edition?query=react"
   },
   {
-    id: generateId(),
     title: "The Joy of Javascript",
     author: "Luis Atencio",
     pages: "612",
@@ -17,15 +15,13 @@ let myLibrary = [
     buy: "https://www.manning.com/books/the-joy-of-javascript?query=the%20joy"
   },
   {
-    id: generateId(),
     title: "The Art of Unit Testing",
     author: "Roy Osherove",
     pages: "325",
-    read: "Read",
+    read: "Unread",
     buy: "https://www.manning.com/books/the-art-of-unit-testing-third-edition?query=the%20art"
   },
   {
-    id: generateId(),
     title: "ASP.NET Core Security",
     author: "Christian Wenz",
     pages: "368",
@@ -33,7 +29,6 @@ let myLibrary = [
     buy: "https://www.manning.com/books/asp-net-core-security?query=asp"
   },
   {
-    id: generateId(),
     title: "TypeScript Quickly",
     author: "Yakov Fain & Anoton Moiseev",
     pages: "488",
@@ -42,17 +37,41 @@ let myLibrary = [
   }
 ]
 
-createList()
-class bookClass {
-  constructor(title, author, pages, read) {
-    this.id = generateId()
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.read = read
-  }
-}    
+// Factory function for creating library objects
+const bookFactory = (title, author, pages, read) => {
+  
+  const id =  Math.random() * 1
 
+  const updateRead = () => {
+    const index = mainLibrary.findIndex(object => object.id === id)
+    if (mainLibrary[index].read === 'Read') {
+      mainLibrary[index].read = 'Unread'
+    } else {
+      mainLibrary[index].read = 'Read'
+    }
+    createList()
+  }
+
+  const deleteBook = () => {
+    const index = mainLibrary.findIndex(object => object.id === id)
+    mainLibrary.splice(index, 1)
+    createList()
+  }
+
+  return { id, title, author, pages, read, updateRead, deleteBook }
+}
+
+// Create library and populate using factory function to ensure inital books inherit factory methods
+let mainLibrary = []
+books.forEach(book => {
+  const newBook = bookFactory(book.title, book.author, book.pages, book.read)
+  mainLibrary.push(newBook)
+})
+
+// Call for creation of library DOM on first load
+createList()
+
+// Create new book object on form submit and add to mainLibrary
 function newBook() {
   const name = document.querySelector("#name").value
   const author = document.querySelector("#author").value
@@ -60,8 +79,9 @@ function newBook() {
   const status = document.querySelector("#status").value
     
   if (name !== '' && author !== '' && pages !== '') {
-    const newAddition = new bookClass(name, author, pages, status); // create new object from user input
-    myLibrary.push(newAddition)
+
+    const newBook = bookFactory(name, author, pages, status)
+    mainLibrary.push(newBook)
     modal.style.display = 'none'
     createList()
     document.querySelector("#name").value = ''
@@ -72,16 +92,13 @@ function newBook() {
   return alert('Form cannot be blank')
 }
 
-function generateId() {
-  return Math.random() * 10000
-}
-
+// Create library DOM
 function createList() {
   
   const bookListWrapper = document.getElementById('bookList')
   bookListWrapper.innerHTML = ''
   
-  myLibrary.forEach(book => {
+  mainLibrary.forEach(book => {
     const container = document.createElement('div')
     container.className = 'bookCard'
 
@@ -94,27 +111,19 @@ function createList() {
     const pages = document.createElement('p')
     pages.innerText = `${book.pages} pages`
     
-    const readButton = document.createElement('button')
-    const status = readStatus(`${book.read}`)
-    let buttonText
-    if (status === 'Read') {
-      buttonText = 'Mark as unread'
-    } else {
-      buttonText = 'Mark as read'
-    }
+    const readButton = document.createElement('button')    
     readButton.type = 'submit'
-    readButton.className = status.toLowerCase()
+    readButton.innerText = book.read
+    readButton.className = book.read.toLowerCase()
     readButton.id = book.id
-    readButton.innerText = buttonText
-    readButton.addEventListener('click', updateReadStatus)
-
+    readButton.addEventListener('click', book.updateRead)
 
     const deleteButton = document.createElement('button')
     deleteButton.type = 'submit'
     deleteButton.id = book.id
     deleteButton.className = 'deleteBook'
     deleteButton.innerText = 'Delete'
-    deleteButton.addEventListener('click', deleteBook)
+    deleteButton.addEventListener('click', book.deleteBook)
 
     const buttonContainer = document.createElement('div')
     buttonContainer.append(readButton, deleteButton)
@@ -125,35 +134,9 @@ function createList() {
   })
 }
 
-function readStatus(arg) {
-  if (arg === 'Read') {
-    return 'Read'
-  } else {
-    return 'Unread'
-  }
-}
-
-function updateReadStatus(event) {
-  const index = myLibrary.findIndex(object => object.id === Number(event.target.id) )
-  if (myLibrary[index].read === 'Read') {
-    myLibrary[index].read = 'Unread'
-  } else {
-    myLibrary[index].read = 'Read'
-  }
-  return createList()
-}
-
-function deleteBook(event) {
-  const index = myLibrary.findIndex(object => object.id === Number(event.target.id) )
-  myLibrary.splice(index, 1)
-  createList()
-}
-
-// Modal 
+// Code for managing modal - getting the elements and altering their display on click
 const modal = document.getElementById('modal')
 const openModal = document.getElementById('openModal')
 const closeModal = document.getElementById('closeModal')
-
-// Open and close modal 
 openModal.onclick = function() { modal.style.display = 'block' }
 closeModal.onclick = function() { modal.style.display = 'none' }
