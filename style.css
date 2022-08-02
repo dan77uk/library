@@ -259,6 +259,12 @@ html button {
   #bookList {
     grid-template-columns: 50fr 50fr;
   }
+
+  #modalInner {
+    margin: 10% 5%;
+    width: 90%;
+    padding: 20px;
+  }
 }
 
 @media only screen and (max-width: 730px) {
