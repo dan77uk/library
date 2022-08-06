@@ -1,5 +1,7 @@
 # The Odin Project - Library App 
 
+[Live Site](https://dan77uk.github.io/library/)
+
 An Odin Project module, as part of the full stack Javascript path, to practice object creation.
 
 I have used a factory function which creates book objects, and also defines methods on the objects to update the read status and delete the object if necessary.
