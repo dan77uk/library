@@ -36,31 +36,6 @@ let books = [
     buy: "https://www.manning.com/books/typescript-quickly?query=type"
   }
 ]
-
-// // Factory function for creating library objects
-// const bookFactory = (title, author, pages, read) => {
-  
-//   const id =  Math.random() * 1
-
-//   const updateRead = () => {
-//     const index = mainLibrary.findIndex(object => object.id === id)
-//     if (mainLibrary[index].read === 'Read') {
-//       mainLibrary[index].read = 'Unread'
-//     } else {
-//       mainLibrary[index].read = 'Read'
-//     }
-//     createList()
-//   }
-
-//   const deleteBook = () => {
-//     const index = mainLibrary.findIndex(object => object.id === id)
-//     mainLibrary.splice(index, 1)
-//     createList()
-//   }
-
-//   return { id, title, author, pages, read, updateRead, deleteBook }
-// }
-
 class bookClass {
 
   constructor(title, author, pages, read) {
@@ -74,6 +49,16 @@ class bookClass {
   deleteBook() {
     const index = mainLibrary.findIndex(object => object.id === Number(this.id))
     mainLibrary.splice(index, 1)
+    createList()
+  }
+
+  updateRead() {
+    const index = mainLibrary.findIndex(object => object.id === Number(this.id))
+    if (mainLibrary[index].read === 'Read') {
+     mainLibrary[index].read = 'Unread'
+      } else {
+     mainLibrary[index].read = 'Read'
+    } 
     createList()
   }
 
