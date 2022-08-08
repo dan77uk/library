@@ -37,34 +37,52 @@ let books = [
   }
 ]
 
-// Factory function for creating library objects
-const bookFactory = (title, author, pages, read) => {
+// // Factory function for creating library objects
+// const bookFactory = (title, author, pages, read) => {
   
-  const id =  Math.random() * 1
+//   const id =  Math.random() * 1
 
-  const updateRead = () => {
-    const index = mainLibrary.findIndex(object => object.id === id)
-    if (mainLibrary[index].read === 'Read') {
-      mainLibrary[index].read = 'Unread'
-    } else {
-      mainLibrary[index].read = 'Read'
-    }
-    createList()
+//   const updateRead = () => {
+//     const index = mainLibrary.findIndex(object => object.id === id)
+//     if (mainLibrary[index].read === 'Read') {
+//       mainLibrary[index].read = 'Unread'
+//     } else {
+//       mainLibrary[index].read = 'Read'
+//     }
+//     createList()
+//   }
+
+//   const deleteBook = () => {
+//     const index = mainLibrary.findIndex(object => object.id === id)
+//     mainLibrary.splice(index, 1)
+//     createList()
+//   }
+
+//   return { id, title, author, pages, read, updateRead, deleteBook }
+// }
+
+class bookClass {
+
+  constructor(title, author, pages, read) {
+    this.title = title 
+    this.author = author 
+    this.pages = pages 
+    this.read = read 
+    this.id = Math.random() * 1
   }
 
-  const deleteBook = () => {
-    const index = mainLibrary.findIndex(object => object.id === id)
+  deleteBook() {
+    const index = mainLibrary.findIndex(object => object.id === Number(this.id))
     mainLibrary.splice(index, 1)
     createList()
   }
 
-  return { id, title, author, pages, read, updateRead, deleteBook }
 }
 
 // Create library and populate using factory function to ensure inital books inherit factory methods
 let mainLibrary = []
 books.forEach(book => {
-  const newBook = bookFactory(book.title, book.author, book.pages, book.read)
+  const newBook = new bookClass(book.title, book.author, book.pages, book.read)
   mainLibrary.push(newBook)
 })
 
@@ -80,7 +98,7 @@ function newBook() {
     
   if (name !== '' && author !== '' && pages !== '') {
 
-    const newBook = bookFactory(name, author, pages, status)
+    const newBook = new bookClass(name, author, pages, status)
     mainLibrary.push(newBook)
     modal.style.display = 'none'
     createList()
